@@ -12,6 +12,8 @@ DOM.decl('radiobox', /** @lends block.prototype */ {
 
                 _this._val = this.findElem(this.elem('radio', 'checked', 'yes'), 'control').val();
 
+                _this._values = [];
+                
                 _this.elem('control').each(function(i, control) {
                     control = $(control);
 
@@ -20,6 +22,8 @@ DOM.decl('radiobox', /** @lends block.prototype */ {
                     _this._isControlFocused(control) && mods.push('focused');
                     control.prop('checked') && mods.push('checked');
 
+                    _this._values.push(control.val());
+                    
                     if(mods.length) {
                         var radio = _this.__self._getRadioByElem(control);
 
@@ -129,6 +133,14 @@ DOM.decl('radiobox', /** @lends block.prototype */ {
         });
 
         return _this;
+    },
+
+    /**
+     * Массив возможных значений контролла
+     * @returns {Array}
+     */
+    values : function() {
+        return this._values;
     },
 
     /**
